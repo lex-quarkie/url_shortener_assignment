@@ -1,4 +1,4 @@
-To start use :
+To start containers, use :
 
-```docker-compose up --build'''
+```docker-compose up --build```
 
