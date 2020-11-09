@@ -1,17 +1,11 @@
-from marshmallow import fields
-from sqlalchemy.orm import sessionmaker
 from app.app import db
 from sqlalchemy import (
     Column,
-    DateTime,
-    ForeignKey,
     Integer,
-    Binary,
     String,
-    UniqueConstraint,
 )
 from sqlalchemy.ext.declarative import declarative_base
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema, auto_field
+from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 Base = declarative_base()
 Base.query = db.session.query_property()

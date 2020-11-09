@@ -1,10 +1,8 @@
-from flask.cli import FlaskGroup
-
 from app.app import db, application
 from app import models
 
 import flask_script
-from flask_migrate import Migrate, MigrateCommand
+from flask_migrate import MigrateCommand
 
 
 def _make_context():

@@ -1,6 +1,6 @@
 import connexion
 from flask_marshmallow import Marshmallow
-from flask_migrate import Migrate, MigrateCommand
+from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
 
