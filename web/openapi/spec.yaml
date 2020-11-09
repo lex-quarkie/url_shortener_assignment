@@ -1,0 +1,98 @@
+openapi: 3.0.1
+info:
+  title: URL shortener
+  version: '1.0'
+  contact:
+    name: Lex Quarkie
+    url: t.me/quarkie
+    email: lex.quarkie@gmail.com
+
+servers:
+  - url: http://0.0.0.0:80
+
+paths:
+  /long_to_short:
+    post:
+      description: Returns shortened url for long url
+      operationId: app.views.long_to_short
+      requestBody:
+        $ref: '#/components/requestBodies/long_to_short_req'
+      responses:
+        '200':
+          $ref: '#/components/responses/short_url'
+
+  /statistics/{short_postfix}:
+    get:
+      description: Returns visits count of shortened url
+      operationId: app.views.stats
+      parameters:
+        - $ref: '#/components/parameters/short_postfix'
+      responses:
+        '200':
+          $ref: '#/components/responses/stats'
+        '400':
+          description: Error
+        '404':
+          description: Not found
+
+  /<short_postfix>:
+    get:
+      description: Returns visits count of shortened url
+      operationId: app.views.go_postfix
+      parameters:
+        - $ref: '#/components/parameters/short_postfix'
+      responses:
+        '200':
+          $ref: '#/components/responses/short_url'
+        '400':
+          description: Error
+        '404':
+          description: Not found
+
+components:
+  schemas:
+    short_url_schema:
+      properties:
+        short_url:
+          type: string
+          example: 8cej3D
+
+    hits_count:
+      properties:
+        count:
+          type: integer
+
+  parameters:
+    short_postfix:
+      in: path
+      name: short_postfix
+      required: true
+      schema:
+        type: string
+
+  requestBodies:
+    long_to_short_req:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              long_url:
+                type: string
+                format: uri
+                example: http://google.com
+
+  responses:
+    short_url:
+      description: returns shortened url
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/short_url_schema'
+    stats:
+      description: returns visits count
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/hits_count'

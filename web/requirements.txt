@@ -1,0 +1,12 @@
+alembic
+connexion[swagger-ui]
+Flask>=1.1.2
+flask-marshmallow
+flask_migrate
+flask_script
+flask_shell
+flask_sqlalchemy
+marshmallow-sqlalchemy
+psycopg2-binary==2.8.4
+
+pytest

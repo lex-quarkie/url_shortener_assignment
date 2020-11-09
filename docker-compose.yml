@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  web:
+    build:
+      context: ./web/
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    env_file:
+      local.env
+    volumes:
+      - ./web/openapi:/openapi
+      - ./web/app:/app
+      - ./web/migrations:/migrations:rw
+      - ./web/tests:/app/tests
+  db:
+    image: postgres:12.0-alpine
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    env_file:
+      local.env
+
+volumes:
+  postgres_data:
